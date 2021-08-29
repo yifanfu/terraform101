@@ -36,3 +36,7 @@ jobs:
       - name: Terraform apply
         run: |
           make apply
+
+      - name: Terraform output
+        run: |
+          make output
