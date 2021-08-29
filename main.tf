@@ -7,22 +7,19 @@ terraform {
   }
 }
 
-resource "random_string" "yifan_random" {
-  length           = 16
-  special          = true
-  override_special = "/@£$"
+resource "random_uuid" "yifan_random" {
 }
 
 resource "aws_s3_bucket" "yifan_bucket" {
-  bucket = "yifan-bucket-${random_string.yifan_random.result}"
+  bucket = "yifan-bucket-${random_uuid.yifan_random.result}"
   acl    = "private"
 
   depends_on = [
-    random_string.yifan_random
+    random_uuid.yifan_random
   ]
 
   tags = {
-    Name        = "yifan-bucket-${random_string.yifan_random.result}"
+    Name        = "yifan-bucket-${random_uuid.yifan_random.result}"
     Environment = var.Environment
   }
 }
