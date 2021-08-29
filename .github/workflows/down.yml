@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container: yifanfu/docker-essentials:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Terraform init
+        run: |
+          make init
+      
+      - name: Terraform destroy
+        run: |
+          make destroy

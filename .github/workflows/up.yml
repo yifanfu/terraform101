@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container: yifanfu/docker-essentials:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Terraform init
+        run: |
+          make init
+      
+      - name: Terraform plan
+        run: |
+          make plan
+      
+      - name: Terraform apply
+        run: |
+          make apply
