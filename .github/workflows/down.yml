@@ -1,4 +1,4 @@
-name: CI
+name: down
 
 on:
   workflow_dispatch:

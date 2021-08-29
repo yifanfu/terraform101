@@ -1,4 +1,4 @@
-name: CI
+name: up
 
 on:
   push:
@@ -16,6 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Show env
+        run: |
+          cat /etc/os-release
 
       - name: Terraform init
         run: |
