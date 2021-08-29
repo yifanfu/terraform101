@@ -7,6 +7,22 @@ terraform {
   }
 }
 
+resource "random_string" "yifan_random" {
+  length           = 16
+  special          = true
+  override_special = "/@£$"
+}
+
+resource "aws_s3_bucket" "yifan_bucket" {
+  bucket = "yifan-bucket-${random_string.yifan_random.result}"
+  acl    = "private"
+
+  tags = {
+    Name        = "yifan-bucket-${random_string.yifan_random.result}"
+    Environment = "Development"
+  }
+}
+
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
@@ -25,4 +41,12 @@ module "ecs" {
   tags = {
     Environment = "Development"
   }
+}
+
+output "bucket-name" {
+  value = aws_s3_bucket.yifan_bucket.bucket
+}
+
+output "ecs" {
+  value = ecs.ecs_cluster_arn
 }
