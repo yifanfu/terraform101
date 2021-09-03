@@ -24,22 +24,22 @@ resource "aws_s3_bucket" "yifan_bucket" {
   }
 }
 
-module "ecs" {
-  source = "terraform-aws-modules/ecs/aws"
+# module "ecs" {
+#   source = "terraform-aws-modules/ecs/aws"
 
-  name = "yifan-cluster"
+#   name = "yifan-cluster"
 
-  container_insights = true
+#   container_insights = true
 
-  capacity_providers = ["FARGATE", "FARGATE_SPOT"]
+#   capacity_providers = ["FARGATE", "FARGATE_SPOT"]
 
-  default_capacity_provider_strategy = [
-    {
-      capacity_provider = "FARGATE_SPOT"
-    }
-  ]
+#   default_capacity_provider_strategy = [
+#     {
+#       capacity_provider = "FARGATE_SPOT"
+#     }
+#   ]
 
-  tags = {
-    Environment = var.Environment
-  }
-}
+#   tags = {
+#     Environment = var.Environment
+#   }
+# }
